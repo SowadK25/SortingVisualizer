@@ -45,4 +45,3 @@ class Button:
         position = pygame.mouse.get_pos()  # Get mouse position
         if self.rect.collidepoint(position):  # If the mouse is inside the button rect
             self.color1 = LIGHT_GREEN  # Change color to light green
-
