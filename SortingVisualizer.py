@@ -5,6 +5,7 @@ from Buttons import Button
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 GREEN = (0, 255, 0)
+PURPLE = (104, 21, 166)
 RED = (255, 0, 0)
 DARK_GREEN = (29, 173, 10)
 LIGHT_GREEN = (57, 229, 34)
@@ -38,6 +39,10 @@ def bubble_sort_visual(array, window, delay):
             pygame.time.delay(delay)
             pygame.display.update()
 
+        if i == len(array) - 1:
+            array_bars(heights, screen, PURPLE)
+            pygame.display.update()
+
 
 def selection_sort_visual(array, window, delay):
     for i in range(len(array)):
@@ -52,6 +57,10 @@ def selection_sort_visual(array, window, delay):
             pygame.display.update()
 
         array[i], array[smallest] = array[smallest], array[i]
+
+        if i == len(array) - 1:
+            array_bars(heights, screen, PURPLE)
+            pygame.display.update()
 
 
 def insertion_sort_visual(array, window, delay):
@@ -68,6 +77,10 @@ def insertion_sort_visual(array, window, delay):
             pygame.display.update()
         array[j + 1] = key
 
+        if i == len(array) - 1:
+            array_bars(heights, screen, PURPLE)
+            pygame.display.update()
+
 
 pygame.init()
 
@@ -76,12 +89,13 @@ screen = pygame.display.set_mode(screen_size)
 pygame.display.set_caption("A sorting visualizer")
 screen.fill(GREEN)
 
-new_array_button = Button("New Array", (75, 550), DARK_GREEN, WHITE)
-bubble_sort_button = Button("Bubble Sort", (250, 550), DARK_GREEN, WHITE)
-selection_sort_button = Button("Selection sort", (425, 550), DARK_GREEN, WHITE)
-insertion_sort_button = Button("Insertion sort", (600, 550), DARK_GREEN, WHITE)
+new_array_button = Button("New Array", (100, 550), DARK_GREEN, WHITE)
+bubble_sort_button = Button("Bubble Sort", (275, 550), DARK_GREEN, WHITE)
+selection_sort_button = Button("Selection sort", (450, 550), DARK_GREEN, WHITE)
+insertion_sort_button = Button("Insertion sort", (625, 550), DARK_GREEN, WHITE)
+quit_button = Button("X", (950, 550), RED, WHITE, (40, 40))
 
-buttons = [new_array_button, bubble_sort_button, selection_sort_button, insertion_sort_button]
+buttons = [new_array_button, bubble_sort_button, selection_sort_button, insertion_sort_button, quit_button]
 
 pygame.display.update()
 
@@ -98,6 +112,9 @@ while running:
                 generate_array(65, heights)
                 array_bars(heights, screen, WHITE)
                 pygame.display.update()
+
+            if quit_button.rect.collidepoint(position):
+                running = False
 
             if bubble_sort_button.rect.collidepoint(position):
                 bubble_sort_visual(heights, screen, 8)
